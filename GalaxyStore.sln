@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaxyStore.API", "GalaxyStore.API\GalaxyStore.API.csproj", "{110A0017-1896-4330-B0FF-FEF600C52F5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaxyStore.Core", "GalaxyStore.Core\GalaxyStore.Core.csproj", "{467C93C7-33C4-45EE-A08C-ECDCBC124906}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaxyStore.Domain", "GalaxyStore.Domain\GalaxyStore.Domain.csproj", "{C6352304-DEFE-4F86-BD8B-79DCC3A429CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalaxyStore.Data", "GalaxyStore.Data\GalaxyStore.Data.csproj", "{0C8CA571-EFA0-4A8A-BB40-F1ACC10F0268}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{110A0017-1896-4330-B0FF-FEF600C52F5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{110A0017-1896-4330-B0FF-FEF600C52F5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{110A0017-1896-4330-B0FF-FEF600C52F5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{110A0017-1896-4330-B0FF-FEF600C52F5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{467C93C7-33C4-45EE-A08C-ECDCBC124906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{467C93C7-33C4-45EE-A08C-ECDCBC124906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{467C93C7-33C4-45EE-A08C-ECDCBC124906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{467C93C7-33C4-45EE-A08C-ECDCBC124906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6352304-DEFE-4F86-BD8B-79DCC3A429CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6352304-DEFE-4F86-BD8B-79DCC3A429CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6352304-DEFE-4F86-BD8B-79DCC3A429CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6352304-DEFE-4F86-BD8B-79DCC3A429CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C8CA571-EFA0-4A8A-BB40-F1ACC10F0268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8CA571-EFA0-4A8A-BB40-F1ACC10F0268}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8CA571-EFA0-4A8A-BB40-F1ACC10F0268}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8CA571-EFA0-4A8A-BB40-F1ACC10F0268}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {168D7BEC-1C69-4CEC-810F-624566385D4A}
+	EndGlobalSection
+EndGlobal

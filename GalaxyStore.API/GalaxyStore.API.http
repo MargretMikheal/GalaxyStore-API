@@ -1,0 +1,6 @@
+@GalaxyStore.API_HostAddress = http://localhost:5219
+
+GET {{GalaxyStore.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
