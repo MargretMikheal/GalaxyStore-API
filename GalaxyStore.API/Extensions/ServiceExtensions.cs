@@ -1,8 +1,11 @@
 ﻿using GalaxyStore.Core.Interfaces.Repositories;
+using GalaxyStore.Core.Interfaces.Services;
 using GalaxyStore.Data;
-using GalaxyStore.Data.Identity;
 using GalaxyStore.Data.Repositories;
 using GalaxyStore.Data.Repository;
+using GalaxyStore.Domain.Helper;
+using GalaxyStore.Domain.Identity;
+using GalaxyStore.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,8 +17,9 @@ namespace GalaxyStore.API.Extensions
         {
             services.AddControllers();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.Configure<JWT>(configuration.GetSection("JWT"));
             // Configure Identity
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {

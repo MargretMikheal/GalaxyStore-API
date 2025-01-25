@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\images\partners\parnersId\" />
     <Folder Include="wwwroot\images\partners\parnersPhoto\" />
     <Folder Include="wwwroot\images\products\" />

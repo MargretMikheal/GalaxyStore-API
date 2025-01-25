@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using GalaxyStore.Domain.Models;
-using GalaxyStore.Data.Identity;
+
 using Microsoft.AspNetCore.Identity;
 using System.Reflection;
+using GalaxyStore.Domain.Identity;
 
 namespace GalaxyStore.Data
 {

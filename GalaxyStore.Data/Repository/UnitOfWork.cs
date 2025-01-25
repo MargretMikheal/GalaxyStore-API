@@ -1,5 +1,4 @@
 ﻿using GalaxyStore.Core.Interfaces.Repositories;
-using GalaxyStore.Data.Identity;
 using GalaxyStore.Data.Repositories;
 using GalaxyStore.Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +7,7 @@ namespace GalaxyStore.Data.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DbContext _context;
+        private readonly ApplicationDbContext _context;
 
 
 
@@ -25,7 +24,7 @@ namespace GalaxyStore.Data.Repository
 
         public IGenericRepository<Warehouse> Warehouses { get; }
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             Products = new GenericRepository<Product>(context);
