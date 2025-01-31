@@ -1,6 +1,5 @@
-﻿using GalaxyStore.Core;
-using GalaxyStore.Core.Interfaces.Services;
-using GalaxyStore.Domain.DTOs;
+﻿using GalaxyStore.Core.Interfaces.Service;
+using GalaxyStore.Domain.DTOs.AuthDtos;
 using GalaxyStore.Domain.Helper;
 using GalaxyStore.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -11,7 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace GalaxyStore.Service
+namespace GalaxyStore.Core.Service
 {
     public class AuthService : IAuthService
     {

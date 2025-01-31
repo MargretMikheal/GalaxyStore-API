@@ -1,8 +1,7 @@
-﻿
-using GalaxyStore.Domain.DTOs;
+﻿using GalaxyStore.Domain.DTOs.AuthDtos;
 using GalaxyStore.Domain.Identity;
 
-namespace GalaxyStore.Core.Interfaces.Services
+namespace GalaxyStore.Core.Interfaces.Service
 {
     public interface IAuthService
     {

@@ -1,12 +1,9 @@
-﻿using GalaxyStore.Core.Interfaces.Services;
-using GalaxyStore.Domain.DTOs;
+﻿using GalaxyStore.Core.Interfaces.Service;
+using GalaxyStore.Domain.DTOs.AuthDtos;
 using GalaxyStore.Domain.Enums;
-using GalaxyStore.Domain.Helper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 
 namespace GalaxyStore.API.Controllers
 {

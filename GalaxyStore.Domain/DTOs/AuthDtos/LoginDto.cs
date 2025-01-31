@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GalaxyStore.Domain.DTOs
+namespace GalaxyStore.Domain.DTOs.AuthDtos
 {
     public class LoginDto
     {

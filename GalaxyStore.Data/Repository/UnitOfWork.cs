@@ -21,6 +21,7 @@ namespace GalaxyStore.Data.Repository
 
         public IGenericRepository<InvoiceItem> InvoiceItems { get; }
         public IGenericRepository<Partner> Partners { get; }
+        public IGenericRepository<Customer> Customers { get; }
 
         public IGenericRepository<Warehouse> Warehouses { get; }
 

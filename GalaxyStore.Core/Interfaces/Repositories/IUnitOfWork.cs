@@ -14,7 +14,8 @@ namespace GalaxyStore.Core.Interfaces.Repositories
         IGenericRepository<Item> Items { get; }
         IGenericRepository<Invoice> Invoices { get; }
         IGenericRepository<InvoiceItem> InvoiceItems { get; }
-       IGenericRepository<Partner> Partners { get; } 
+        IGenericRepository<Partner> Partners { get; }
+        IGenericRepository<Customer> Customers { get; }
         IGenericRepository<Warehouse> Warehouses { get; }
         Task<int> CompleteAsync();
     }

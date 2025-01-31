@@ -1,11 +1,12 @@
 ﻿using GalaxyStore.Core.Interfaces.Repositories;
-using GalaxyStore.Core.Interfaces.Services;
+using GalaxyStore.Core.Interfaces.Service;
+using GalaxyStore.Core.Service;
+using GalaxyStore.Core.Service.Mappings;
 using GalaxyStore.Data;
 using GalaxyStore.Data.Repositories;
 using GalaxyStore.Data.Repository;
 using GalaxyStore.Domain.Helper;
 using GalaxyStore.Domain.Identity;
-using GalaxyStore.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,11 @@ namespace GalaxyStore.API.Extensions
             services.AddControllers();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<ISupplierService, SupplierService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            MapsterConfiguration.RegisterMappings();
             services.Configure<JWT>(configuration.GetSection("JWT"));
             // Configure Identity
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
