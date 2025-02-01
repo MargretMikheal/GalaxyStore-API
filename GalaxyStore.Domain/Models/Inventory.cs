@@ -9,6 +9,7 @@
         public int ProductId { get; set; }
         public Product Product { get; set; }
 
-        public int NumOfProduct { get; set; }
+        public int NumOfProductInStock { get; set; }
+        public int NumOfProductInStore { get; set; }
     }
 }

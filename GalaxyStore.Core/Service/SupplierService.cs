@@ -26,15 +26,8 @@ namespace GalaxyStore.Core.Service
             var supplierDtos = suppliers.Select(supplier =>
             {
                 var dto = supplier.Adapt<SupplierDto>();
-
-                Console.WriteLine($"Image Path: {supplier.Image}");
-                Console.WriteLine($"ID Image Path: {supplier.IdImagePath}");
-
                 dto.Image = FileHelper.ReadFileAsBytes(supplier.Image);
-                dto.IdImage = FileHelper.ReadFileAsBytes(supplier.IdImagePath); 
-
-                Console.WriteLine($"Image: {dto.Image != null}");
-                Console.WriteLine($"ID Image: {dto.IdImage != null}");
+                dto.IdImage = FileHelper.ReadFileAsBytes(supplier.IdImagePath);
 
                 return dto;
             }).ToList();
@@ -100,6 +93,7 @@ namespace GalaxyStore.Core.Service
 
             var supplier = dto.Adapt<Supplier>();
             supplier.CreationDate = DateTime.UtcNow;
+
             supplier.Image = await imagePath; 
             supplier.IdImagePath = await idImagePath; 
 
@@ -107,6 +101,8 @@ namespace GalaxyStore.Core.Service
             await _unitOfWork.CompleteAsync();
 
             var supplierDto = supplier.Adapt<SupplierDto>();
+            supplierDto.Image = FileHelper.ReadFileAsBytes(supplier.Image);
+            supplierDto.IdImage = FileHelper.ReadFileAsBytes(supplier.IdImagePath);
 
             return new ServiceResponse<SupplierDto>
             {

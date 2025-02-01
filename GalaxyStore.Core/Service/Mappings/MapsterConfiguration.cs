@@ -1,5 +1,7 @@
 ﻿using GalaxyStore.Core.Helper;
 using GalaxyStore.Domain.DTOs;
+using GalaxyStore.Domain.DTOs.InvoiceDtos;
+using GalaxyStore.Domain.DTOs.ProductDtos;
 using GalaxyStore.Domain.DTOs.SupplierDtos;
 using GalaxyStore.Domain.Identity;
 using GalaxyStore.Domain.Models;
@@ -28,12 +30,25 @@ namespace GalaxyStore.Core.Service.Mappings
             // Map UpdateProfileDto -> ApplicationUser
             TypeAdapterConfig<UpdateProfileDto, ApplicationUser>.NewConfig()
                 .Map(dest => dest.Email, src => src.Email)
-                .Map(dest => dest.Name, src => src.Name);
+                .Map(dest => dest.Name, src => src.Name);         
 
             TypeAdapterConfig<Supplier, SupplierDto>.NewConfig()
            .Ignore(dest => dest.Image)
            .Ignore(dest => dest.IdImage);
-            
+
+              TypeAdapterConfig<Product, ProductDto>.NewConfig()
+           .Ignore(dest => dest.ProductPhoto);
+
+              TypeAdapterConfig<Product, ProductDetailsDto>.NewConfig()
+           .Ignore(dest => dest.ProductPhoto);
+
+
+            TypeAdapterConfig<CreateInvoiceDto, Invoice>.NewConfig()
+                .Map(dest => dest.Type, src => Domain.Enums.InvoiceType.Buying)
+                .Ignore(dest => dest.CreationDate)
+                .Ignore(dest => dest.TotalPay);
+
+
         }
     }
 }

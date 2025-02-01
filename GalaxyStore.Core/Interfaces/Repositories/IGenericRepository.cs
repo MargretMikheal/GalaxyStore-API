@@ -17,5 +17,6 @@ namespace GalaxyStore.Core.Interfaces.Repositories
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
         void Update(T entity);
         void Remove(T entity);
+        Task<int> CountAsync(Expression<Func<T, bool>> predicate = null);
     }
 }

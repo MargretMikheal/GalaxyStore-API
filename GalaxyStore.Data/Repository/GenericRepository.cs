@@ -79,5 +79,10 @@ namespace GalaxyStore.Data.Repositories
         {
             return await _dbSet.FirstOrDefaultAsync(predicate);
         }
+
+        public async Task<int> CountAsync(Expression<Func<T, bool>> predicate = null)
+        {
+            return predicate == null ? await _dbSet.CountAsync() : await _dbSet.CountAsync(predicate);
+        }
     }
 }

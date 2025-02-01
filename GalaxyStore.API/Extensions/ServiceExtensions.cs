@@ -2,6 +2,7 @@
 using GalaxyStore.Core.Interfaces.Service;
 using GalaxyStore.Core.Service;
 using GalaxyStore.Core.Service.Mappings;
+using GalaxyStore.Core.Services;
 using GalaxyStore.Data;
 using GalaxyStore.Data.Repositories;
 using GalaxyStore.Data.Repository;
@@ -19,8 +20,10 @@ namespace GalaxyStore.API.Extensions
             services.AddControllers();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ISupplierService, SupplierService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             MapsterConfiguration.RegisterMappings();
