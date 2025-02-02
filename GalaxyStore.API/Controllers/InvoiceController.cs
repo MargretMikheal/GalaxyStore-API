@@ -1,5 +1,7 @@
 ﻿using GalaxyStore.Core.Interfaces.Service;
 using GalaxyStore.Domain.DTOs.InvoiceDtos;
+using GalaxyStore.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +9,7 @@ namespace GalaxyStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = nameof(UserRole.Admin) + "," + nameof(UserRole.Sales))]
     public class InvoiceController : ControllerBase
     {
         private readonly IInvoiceService _invoiceService;

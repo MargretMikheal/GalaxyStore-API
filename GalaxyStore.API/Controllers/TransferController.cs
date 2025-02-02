@@ -1,11 +1,14 @@
 ﻿using GalaxyStore.Core.Interfaces.Service;
 using GalaxyStore.Domain.DTOs.TransferDtos;
+using GalaxyStore.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GalaxyStore.API.Controllers
 {
     [Route("api/transfer")]
     [ApiController]
+    [Authorize(Roles = nameof(UserRole.Admin) + "," + nameof(UserRole.Manager))]
     public class TransferController : ControllerBase
     {
         private readonly ITransferService _transferService;

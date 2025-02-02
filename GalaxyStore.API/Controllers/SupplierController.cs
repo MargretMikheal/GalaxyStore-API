@@ -1,11 +1,15 @@
 ﻿using GalaxyStore.Core.Interfaces.Service;
 using GalaxyStore.Domain.DTOs.SupplierDtos;
+using GalaxyStore.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GalaxyStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = nameof(UserRole.Admin)+","+nameof(UserRole.Manager))]
+
     public class SupplierController : ControllerBase
     {
         private readonly ISupplierService _supplierService;

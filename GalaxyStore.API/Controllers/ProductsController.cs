@@ -1,5 +1,7 @@
 ﻿using GalaxyStore.Core.Interfaces.Service;
 using GalaxyStore.Domain.DTOs.ProductDtos;
+using GalaxyStore.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -7,6 +9,7 @@ namespace GalaxyStore.API.Controllers
 {
     [Route("api/products")]
     [ApiController]
+    [Authorize(Roles = nameof(UserRole.Admin))]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
