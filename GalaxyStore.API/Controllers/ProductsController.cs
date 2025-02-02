@@ -60,11 +60,6 @@ namespace GalaxyStore.API.Controllers
         }
 
         
-        //[HttpGet("barcode/{barcode}")]
-        //public async Task<IActionResult> GetProductByBarcode(string barcode)
-        //{
-        //    var response = await _productService.GetProductByBarcodeAsync(barcode);
-        //    return response.Success ? Ok(response) : NotFound(response);
-        //}
+        
     }
 }

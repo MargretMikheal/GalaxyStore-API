@@ -9,6 +9,5 @@ namespace GalaxyStore.Core.Interfaces.Service
         Task<ServiceResponse<List<ProductDto>>> GetAllProductsAsync();
         Task<ServiceResponse<List<ProductDetailsDto>>> GetAllProductsInDetailsAsync();
         Task<ServiceResponse<ProductDto>> GetProductByIdAsync(int id);
-       // Task<ServiceResponse<ProductDto>> GetProductByBarcodeAsync(string barcode);
     }
 }

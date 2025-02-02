@@ -125,21 +125,6 @@ namespace GalaxyStore.Core.Service
             };
         }
 
-        //public async Task<ServiceResponse<ProductDto>> GetProductByBarcodeAsync(string barcode)
-        //{
-        //    var product = await _unitOfWork.Products.FirstOrDefaultAsync(p => p.Serial == barcode);
-        //    if (product == null)
-        //        return new ServiceResponse<ProductDto> { Success = false, Message = "Product not found." };
-
-        //    var productDto = product.Adapt<ProductDto>();
-        //    productDto.ProductPhoto = FileHelper.ReadFileAsBytes(product.ProductPhoto);
-
-        //    return new ServiceResponse<ProductDto>
-        //    {
-        //        Success = true,
-        //        Data = productDto,
-        //        Message = "Product retrieved successfully."
-        //    };
-        //}
+        
     }
 }
