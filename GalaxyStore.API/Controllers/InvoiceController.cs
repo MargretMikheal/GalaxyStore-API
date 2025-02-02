@@ -35,5 +35,16 @@ namespace GalaxyStore.API.Controllers
                 return NotFound(result);
             return Ok(result);
         }
+
+        [HttpPost("create-customer-invoice")]
+        public async Task<IActionResult> CreateCustomerInvoice([FromBody] CreateCustomerInvoiceDto invoiceDto)
+        {
+            var result = await _invoiceService.CreateCustomerInvoiceAsync(invoiceDto);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     }
 }

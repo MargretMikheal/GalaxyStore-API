@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace GalaxyStore.Core.Services
+namespace GalaxyStore.Core.Service
 {
     public class InvoiceService : IInvoiceService
     {
@@ -167,5 +167,116 @@ namespace GalaxyStore.Core.Services
             response.Message = "Latest supplier transactions retrieved successfully.";
             return response;
         }
+
+        public async Task<ServiceResponse<int>> CreateCustomerInvoiceAsync(CreateCustomerInvoiceDto invoiceDto)
+        {
+            var response = new ServiceResponse<int>();
+
+            if (invoiceDto == null || invoiceDto.Items == null || !invoiceDto.Items.Any())
+            {
+                return new ServiceResponse<int>
+                {
+                    Success = false,
+                    Message = "Invalid invoice data."
+                };
+            }
+
+            var customer = await _unitOfWork.Partners.FirstOrDefaultAsync(p => p is Customer && p.Id == invoiceDto.CustomerId);
+            if (customer == null)
+            {
+                response.Success = false;
+                response.Message = "Customer not found.";
+                return response;
+            }
+
+            using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                try
+                {
+                    var invoice = new Invoice
+                    {
+                        Type = InvoiceType.Selling,
+                        PartnerId = invoiceDto.CustomerId,
+                        CreationDate = DateTime.UtcNow,
+                        InvoiceItems = new List<InvoiceItem>()
+                    };
+                    await _unitOfWork.Invoices.AddAsync(invoice);
+
+                    foreach (var itemDto in invoiceDto.Items)
+                    {
+                        var product = await _unitOfWork.Products.GetByIdAsync(itemDto.ProductId);
+                        if (product == null)
+                        {
+                            response.Success = false;
+                            response.Message = $"Product with ID {itemDto.ProductId} not found.";
+                            return response;
+                        }
+
+                        var warehouse = await _unitOfWork.Warehouses.GetByIdAsync(invoiceDto.WarhouseId);
+                        if (warehouse == null)
+                        {
+                            response.Success = false;
+                            response.Message = $"Warehouse with ID {invoiceDto.WarhouseId} not found.";
+                            return response;
+                        }
+
+                        var invoiceItem = new InvoiceItem
+                        {
+                            ProductId = itemDto.ProductId,
+                            Quantity = itemDto.Barcodes.Count,
+                            ItemPrice = product.SellingPrice,
+                            Total = itemDto.Barcodes.Count * product.SellingPrice,
+                            WarehouseId = invoiceDto.WarhouseId
+                        };
+
+                        await _unitOfWork.InvoiceItems.AddAsync(invoiceItem);
+                        invoice.InvoiceItems.Add(invoiceItem);
+
+                        var inventory = await _unitOfWork.Inventory.FirstOrDefaultAsync(i => i.ProductId == itemDto.ProductId && i.WarehouseId == invoiceDto.WarhouseId);
+                        if (inventory != null && inventory.NumOfProductInStore >= itemDto.Barcodes.Count)
+                        {
+                            inventory.NumOfProductInStore -= itemDto.Barcodes.Count;
+                            _unitOfWork.Inventory.Update(inventory);
+                        }
+                        else
+                        {
+                            response.Success = false;
+                            response.Message = $"Insufficient stock for product ID {itemDto.ProductId} in warehouse ID {invoiceDto.WarhouseId}.";
+                            return response;
+                        }
+
+                        foreach (var barcode in itemDto.Barcodes)
+                        {
+                            var item = await _unitOfWork.Items.FirstOrDefaultAsync(i => i.Barcode == barcode);
+                            if (item != null)
+                            {
+                                item.IsDeleted = true;
+                                item.DeletedDate = DateTime.UtcNow;
+                                _unitOfWork.Items.Update(item);
+                            }
+                        }
+                    }
+
+                    invoice.TotalPay = invoice.InvoiceItems.Sum(ii => ii.Total);
+                    customer.LastTransactionDate = DateTime.UtcNow;
+                    _unitOfWork.Partners.Update(customer);
+                    await _unitOfWork.CompleteAsync();
+                    transaction.Complete();
+
+                    response.Data = invoice.Id;
+                    response.Success = true;
+                    response.Message = "Customer invoice created successfully.";
+                }
+                catch (Exception ex)
+                {
+                    response.Success = false;
+                    response.Message = $"An error occurred: {ex.Message}";
+                }
+            }
+
+            return response;
+        }
+
+
     }
 }

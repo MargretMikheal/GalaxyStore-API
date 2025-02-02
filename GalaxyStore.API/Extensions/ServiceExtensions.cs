@@ -2,7 +2,6 @@
 using GalaxyStore.Core.Interfaces.Service;
 using GalaxyStore.Core.Service;
 using GalaxyStore.Core.Service.Mappings;
-using GalaxyStore.Core.Services;
 using GalaxyStore.Data;
 using GalaxyStore.Data.Repositories;
 using GalaxyStore.Data.Repository;
@@ -22,6 +21,7 @@ namespace GalaxyStore.API.Extensions
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IInvoiceService, InvoiceService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITransferService, TransferService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ISupplierService, SupplierService>();

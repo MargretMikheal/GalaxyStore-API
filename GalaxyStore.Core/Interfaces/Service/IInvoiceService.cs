@@ -11,5 +11,7 @@ namespace GalaxyStore.Core.Interfaces.Service
     {
         Task<ServiceResponse<int>> CreateSupplierInvoiceAsync(CreateInvoiceDto invoiceDto);
         Task<ServiceResponse<List<LatestSupplierTransactionDto>>> GetLatestSupplierTransactionsAsync();
+        Task<ServiceResponse<int>> CreateCustomerInvoiceAsync(CreateCustomerInvoiceDto invoiceDto);
+
     }
 }
