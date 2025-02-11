@@ -17,6 +17,7 @@ namespace GalaxyStore.Data.EntityConfigration
                    .WithMany()
                    .HasForeignKey(i => i.SupplierId);
             builder.HasIndex(i => i.Barcode).IsUnique();
+            builder.HasQueryFilter(i => !i.IsDeleted);
         }
     }
 }

@@ -17,6 +17,10 @@ namespace GalaxyStore.API.Extensions
     {
         public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // Configure DbContext
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("CS")));
+
             services.AddControllers();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IAuthService, AuthService>();
@@ -27,14 +31,14 @@ namespace GalaxyStore.API.Extensions
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ISupplierService, SupplierService>();
 
-            services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
-            services.AddScoped<IGenericRepository<Inventory>, GenericRepository<Inventory>>();
-            services.AddScoped<IGenericRepository<Item>, GenericRepository<Item>>();
-            services.AddScoped<IGenericRepository<Invoice>, GenericRepository<Invoice>>();
-            services.AddScoped<IGenericRepository<InvoiceItem>, GenericRepository<InvoiceItem>>();
-            services.AddScoped<IGenericRepository<Partner>, GenericRepository<Partner>>();
-            services.AddScoped<IGenericRepository<Customer>, GenericRepository<Customer>>();
-            services.AddScoped<IGenericRepository<Warehouse>, GenericRepository<Warehouse>>();
+            //services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
+            //services.AddScoped<IGenericRepository<Inventory>, GenericRepository<Inventory>>();
+            //services.AddScoped<IGenericRepository<Item>, GenericRepository<Item>>();
+            //services.AddScoped<IGenericRepository<Invoice>, GenericRepository<Invoice>>();
+            //services.AddScoped<IGenericRepository<InvoiceItem>, GenericRepository<InvoiceItem>>();
+            //services.AddScoped<IGenericRepository<Partner>, GenericRepository<Partner>>();
+            //services.AddScoped<IGenericRepository<Customer>, GenericRepository<Customer>>();
+            //services.AddScoped<IGenericRepository<Warehouse>, GenericRepository<Warehouse>>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             MapsterConfiguration.RegisterMappings();
@@ -47,9 +51,7 @@ namespace GalaxyStore.API.Extensions
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-            // Configure DbContext
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("CS")));
+           
 
             services.AddEndpointsApiExplorer();
         }
