@@ -13,9 +13,6 @@ Galaxy API is a backend solution built using a three-layer architecture (Present
 - [System Roles](#system-roles)
 - [Default Credentials](#default-credentials)
 - [Setup & Installation](#setup--installation)
-- [API Endpoints](#api-endpoints)
-- [Additional Notes](#additional-notes)
-- [License](#license)
 
 ---
 
