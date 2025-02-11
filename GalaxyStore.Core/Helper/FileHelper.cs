@@ -3,39 +3,39 @@ using System.IO;
 
 namespace GalaxyStore.Core.Helper
 {
-    public static class FileHelper
-    {
-        private const string BasePath = "wwwroot/images";
-
-        public static async Task<string> SaveFileAsync(IFormFile file, string subFolder)
+        public static class FileHelper
         {
-            var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), BasePath, subFolder);
+            private const string BasePath = "wwwroot/images";
 
-            if (!Directory.Exists(directoryPath))
-                Directory.CreateDirectory(directoryPath);
-
-            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-
-            var filePath = Path.Combine(directoryPath, fileName);
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            public static async Task<string> SaveFileAsync(IFormFile file, string subFolder)
             {
-                await file.CopyToAsync(stream);
+                var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), BasePath, subFolder);
+
+                if (!Directory.Exists(directoryPath))
+                    Directory.CreateDirectory(directoryPath);
+
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+
+                var filePath = Path.Combine(directoryPath, fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                return $"/{subFolder}/{fileName}".Replace("\\", "/");
             }
 
-            return $"/{BasePath}/{subFolder}/{fileName}".Replace("\\", "/");
-        }
+            public static byte[] ReadFileAsBytes(string filePath)
+            {
+                if (string.IsNullOrEmpty(filePath))
+                    return null;
 
-        public static byte[] ReadFileAsBytes(string filePath)
-        {
-            if (string.IsNullOrEmpty(filePath))
-                return null;
+                var absolutePath = Path.Combine(Directory.GetCurrentDirectory(), BasePath, filePath.TrimStart('/'));
 
-            var absolutePath = Path.Combine(Directory.GetCurrentDirectory(), filePath.TrimStart('/'));
+                if (!File.Exists(absolutePath))
+                    return null;
 
-            if (!File.Exists(absolutePath))
-                return null;
-
-            return File.ReadAllBytes(absolutePath);
+                return File.ReadAllBytes(absolutePath);
+            }
         }
     }
-}

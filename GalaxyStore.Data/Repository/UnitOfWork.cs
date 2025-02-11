@@ -25,16 +25,26 @@ namespace GalaxyStore.Data.Repository
 
         public IGenericRepository<Warehouse> Warehouses { get; }
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(
+             ApplicationDbContext context,
+             IGenericRepository<Product> products,
+             IGenericRepository<Inventory> inventory,
+             IGenericRepository<Item> items,
+             IGenericRepository<Invoice> invoices,
+             IGenericRepository<InvoiceItem> invoiceItems,
+             IGenericRepository<Partner> partners,
+             IGenericRepository<Customer> customers,
+             IGenericRepository<Warehouse> warehouses)
         {
             _context = context;
-            Products = new GenericRepository<Product>(context);
-            Inventory = new GenericRepository<Inventory>(context);
-            Items = new GenericRepository<Item>(context);
-            Invoices = new GenericRepository<Invoice>(context);
-            InvoiceItems = new GenericRepository<InvoiceItem>(context);
-            Partners = new GenericRepository<Partner>(context);
-            Warehouses = new GenericRepository<Warehouse>(context);
+            Products = products;
+            Inventory = inventory;
+            Items = items;
+            Invoices = invoices;
+            InvoiceItems = invoiceItems;
+            Partners = partners;
+            Customers = customers;
+            Warehouses = warehouses;
         }
 
         public async Task<int> CompleteAsync()
